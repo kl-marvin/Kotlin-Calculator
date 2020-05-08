@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
     fun onDigit(view : View){
        // Toast.makeText(this, "Btn clicked", Toast.LENGTH_LONG).show()
 
-        // on récupère le text du button et on l'ajoute dans l'input
+        // on récupère le texte du button et on l'ajoute dans l'input
         tvInput.append((view as Button).text)
         lastNumeric = true
 
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
     fun onDecimalPoint(view: View){
         // we check if the last btn was numeric and not a dot
         if(lastNumeric && !lastDot){
-            // if so we add a . and put lastDot to false true
+            // if so we add a . and put lastDot to true
             tvInput.append(".")
 
             lastNumeric = false
@@ -45,6 +45,28 @@ class MainActivity : AppCompatActivity() {
         tvInput.text = ""
         lastDot = false
         lastNumeric = false
+    }
+
+    fun onOperator(view: View){
+        // si la value est un numérique et n'est pas un opérateur
+        if(lastNumeric && !isOperatorAdded(tvInput.text.toString())){
+            // ajoute l'opérateur
+            tvInput.append((view as Button).text)
+            lastNumeric = false
+            lastDot = false
+        }
+    }
+
+    fun isOperatorAdded(value:String) : Boolean{
+        // won't block when calculating a value that is < 0
+        return if (value.startsWith("-")){
+            false
+        }else{
+            value.contains("/") ||
+            value.contains("*") ||
+            value.contains("+") ||
+            value.contains("-")
+        }
     }
 
 

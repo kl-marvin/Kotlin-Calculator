@@ -69,7 +69,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/orange"
-            android:onClick="onDigit"
+            android:onClick="onOperator"
             android:text="/"
             android:textColor="#FFFF"
             android:textSize="24dp"
@@ -134,7 +134,7 @@
             android:textColor="#FFFF"
             android:text="*"
             android:textSize="24dp"
-            android:onClick="onDigit"
+            android:onClick="onOperator"
 
             />
 
@@ -194,7 +194,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/orange"
-            android:onClick="onDigit"
+            android:onClick="onOperator"
             android:text="-"
             android:textColor="#FFFF"
             android:textSize="24dp"
@@ -248,7 +248,7 @@
             android:textColor="#FFFF"
             android:text="+"
             android:textSize="24dp"
-            android:onClick="onDigit"
+            android:onClick="onOperator"
 
             />
 
