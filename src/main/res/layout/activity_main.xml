@@ -234,7 +234,7 @@
             android:background="@color/darkGrey"
             android:text="."
             android:textSize="26dp"
-            android:onClick="onDigit"
+            android:onClick="onDecimalPoint"
 
             />
 
@@ -279,11 +279,10 @@
             android:id="@+id/btnClear"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-
             android:layout_weight="1"
             android:background="@color/orange"
-            android:onClick="onDigit"
             android:focusable="true"
+            android:onClick="clear"
             android:text="C"
             android:textColor="#FFFF"
             android:textSize="24dp" />

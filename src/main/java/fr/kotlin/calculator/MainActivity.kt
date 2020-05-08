@@ -3,9 +3,15 @@ package fr.kotlin.calculator
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+
+    var lastNumeric = false
+    var lastDot = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,7 +21,31 @@ class MainActivity : AppCompatActivity() {
 
 
     fun onDigit(view : View){
-        Toast.makeText(this, "Btn clicked", Toast.LENGTH_LONG).show()
+       // Toast.makeText(this, "Btn clicked", Toast.LENGTH_LONG).show()
+
+        // on récupère le text du button et on l'ajoute dans l'input
+        tvInput.append((view as Button).text)
+        lastNumeric = true
 
     }
+
+    fun onDecimalPoint(view: View){
+        // we check if the last btn was numeric and not a dot
+        if(lastNumeric && !lastDot){
+            // if so we add a . and put lastDot to false true
+            tvInput.append(".")
+
+            lastNumeric = false
+            lastDot = true
+        }
+    }
+
+
+    fun clear(view: View){
+        tvInput.text = ""
+        lastDot = false
+        lastNumeric = false
+    }
+
+
 }
