@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import java.lang.ArithmeticException
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,6 +18,69 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+    }
+
+
+    fun onEqual(view: View){
+        if(lastNumeric){
+            // on récupère l'input
+            var value = tvInput.text.toString()
+            var prefix = ""
+
+            try {
+                if(value.startsWith("-")){
+                    prefix = "-"
+                    value = value.substring(1)
+                }
+                if(value.contains("-")){
+                    val splitedValue = value.split("-")
+                    var diminuende = splitedValue[0]
+                    val diminutor = splitedValue[1]
+
+                    if(!prefix.isEmpty()){
+                        diminuende = prefix + diminuende
+                    }
+
+                    val difference = removeZero((diminuende.toDouble() - diminutor.toDouble()).toString())
+                    tvInput.text = difference
+                }
+                if(value.contains("+")){
+                    val splitedValue = value.split("+")
+                    val terme1 = splitedValue[0]
+                    val terme2 = splitedValue[1]
+
+                    val somme = removeZero((terme1.toDouble() + terme2.toDouble()).toString())
+                    tvInput.text = somme
+                }
+                if(value.contains("/")){
+                    val splitedValue = value.split("/")
+                    val num1 = splitedValue[0]
+                    val num2 = splitedValue[1]
+
+                    val quotient = removeZero((num1.toDouble() / num2.toDouble()).toString())
+                    tvInput.text = quotient
+                }
+                if(value.contains("*")){
+                    val splitedValue = value.split("*")
+                    val num1 = splitedValue[0]
+                    val num2 = splitedValue[1]
+
+                    val result = removeZero((num1.toDouble() * num2.toDouble()).toString())
+                    tvInput.text = result
+                }
+            }catch (e: ArithmeticException){
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun removeZero(result: String): String {
+        var value = result
+        if(result.contains(".0"))
+            value = result.substring(0, result.length-2)
+            //99.0
+
+        return value
     }
 
 
@@ -39,7 +103,6 @@ class MainActivity : AppCompatActivity() {
             lastDot = true
         }
     }
-
 
     fun clear(view: View){
         tvInput.text = ""
@@ -68,6 +131,4 @@ class MainActivity : AppCompatActivity() {
             value.contains("-")
         }
     }
-
-
 }
